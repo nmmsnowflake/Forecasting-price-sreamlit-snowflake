@@ -332,12 +332,16 @@ st.write(f"Forecasted Prices for the next {period} days for {ticker_mapping[sele
 forecast_df = pd.DataFrame({'Date': future_dates, 'Forecasted Prices': forecast})
 st.dataframe(forecast_df)
 
-# Plot the forecasted results using Streamlit's line chart
-st.write(f"Plot of Average Price with Forecasted prices")
-st.line_chart(pd.concat([df_selected_ticker['AVERAGE_LAST_PRICE'], forecast_df.set_index('Date')], axis=1))
+ # Display the forecasted prices using Plotly line chart
+    st.write(f"## Forecasted Prices Chart for {ticker_mapping[selected_ticker]}")
+    forecast_fig = go.Figure()
+    forecast_fig.add_trace(go.Scatter(x=df_selected_ticker.index, y=df_selected_ticker['AVERAGE_LAST_PRICE'], mode='lines', name='Historical Prices'))
+    forecast_fig.add_trace(go.Scatter(x=forecast_df['Date'], y=forecast_df['Forecasted Prices'], mode='lines', name='Forecasted Prices'))
+    forecast_fig.update_layout(title=f"Stock Prices for {ticker_mapping[selected_ticker]}", xaxis_title='Date', yaxis_title='Price')
+    st.plotly_chart(forecast_fig)
 ```
 
-![Reference](forecasted prices graph:chart.png)
+![Reference](plotly graph.png)
 
 #### Code Explained
 `st.write(f"Forecasted Prices for the next {period} days for {ticker_mapping[selected_ticker]}:")`<br> 
@@ -546,6 +550,8 @@ Inside the nested loops, we create a new instance of the Prophet model named m w
 Duration: 0
 
 ### References:
+*Original Zepl Reference Quickstart
+[Original quickstart](https://quickstarts.snowflake.com/guide/time_series_forecasting_zepl/index.html?index=..%2F..index#7)
 * Blogs
  * [towards data science](https://towardsdatascience.com/time-series-analysis-with-statsmodels-12309890539a)
  * [Statsmodel library](https://www.statsmodels.org/stable/index.html)
