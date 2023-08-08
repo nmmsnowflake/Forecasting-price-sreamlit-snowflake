@@ -341,7 +341,7 @@ st.dataframe(forecast_df)
     st.plotly_chart(forecast_fig)
 ```
 
-![Reference](plotly graph.png)
+![Reference](plotly-graph.png)
 
 #### Code Explained
 `st.write(f"Forecasted Prices for the next {period} days for {ticker_mapping[selected_ticker]}:")`<br> 
@@ -550,6 +550,7 @@ Inside the nested loops, we create a new instance of the Prophet model named m w
 Duration: 0
 
 ### References:
+
 *Original Zepl Reference Quickstart
 [Original quickstart](https://quickstarts.snowflake.com/guide/time_series_forecasting_zepl/index.html?index=..%2F..index#7)
 * Blogs
